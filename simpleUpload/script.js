@@ -60,12 +60,14 @@ function processFilename() {
 
 // query ajapaik and process response
 function queryAjapaik(id) {
-    var url = 'http://api.ajapaik.ee/api-v1.php?action=photo&photo_id=1811' + id;
+    var url = 'http://api.ajapaik.ee/api-v1.php?action=photo&photo_id=' + id;
 
     $.ajax({
         url: url,
         type: 'GET',
         success: function (data) {
+            console.log(data)
+            console.log(data.result.rephoto_of_id)
             // check if the image is valid
             if (data.result.rephoto_of_id != null) {
                 var date = data.result.created;
@@ -73,16 +75,16 @@ function queryAjapaik(id) {
                 var fileName = 'Ajapaik_' + id + '.jpg';
                 var imageUrl = data.result.image_large;
 
-                var magnusurl = '//tools.wmflabs.org/url2commons/index.html?' +
+                var magnusUrl = '//tools.wmflabs.org/url2commons/index.html?' +
                                 'run=1&' +
                                 'urls=' + imageUrl.replace( /_/g , "$US$" ) + ' ' +
                                 fileName + '|' +
                                 encodeURIComponent(imageDescription).replace( /_/g , "$US$" ) +
                                 '&desc=$DESCRIPTOR$';
 
-                $('#thumb').attr("src", imageurl);
-                $('#submit_button').attr("href", magnusurl);
-                $('#submit_button').html('<big>Upload as</big><br/>' + destFile);
+                $('#thumb').attr("src", imageUrl);
+                $('#submit_button').attr("href", magnusUrl);
+                $('#submit_button').html('<big>Upload as</big><br/>' + fileName);
                 $('#thumbDiv').removeClass('hidden');
             } else {
                 $('#reflect').text('This image is not a rephotograph and can\'t be uploaded to commons!');
