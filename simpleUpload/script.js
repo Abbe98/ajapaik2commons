@@ -68,22 +68,7 @@ function queryAjapaik(id) {
         success: function (data) {
             // check if the image is valid
             if (data.result.rephoto_of_id != null) {
-                var date = data.result.created;
-                var imageDescription = '#TODO Template goes here';
-                var fileName = 'Ajapaik ' + id + '.jpg';
-                var imageUrl = data.result.image_large;
-
-                var magnusUrl = '//tools.wmflabs.org/url2commons/index.html?' +
-                                'run=1&' +
-                                'urls=' + imageUrl.replace( /_/g , "$US$" ) + ' ' +
-                                fileName + '|' +
-                                encodeURIComponent(imageDescription).replace( /_/g , "$US$" ) +
-                                '&desc=$DESCRIPTOR$';
-
-                $('#thumb').attr("src", imageUrl);
-                $('#submit_button').attr("href", magnusUrl);
-                $('#submit_button').html('<big>Upload as</big><br/>' + fileName);
-                $('#thumbDiv').removeClass('hidden');
+                var location = getImageLocation(data.result.rephoto_of_id, data);
             } else {
                 $('#reflect').text('This image is not a rephotograph and can\'t be uploaded to commons!');
             }
@@ -96,6 +81,51 @@ function queryAjapaik(id) {
             }
         }
     });
+}
+
+function getImageLocation(id, data) {
+    var url = 'http://api.ajapaik.ee/api-v1.php?action=photo&photo_id=' + id;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (data) {
+            var location = {};
+            location.lat = data.result.lat;
+            location.lon = data.result.lon;
+            location.azimuth = data.result.azimuth;
+
+            done(location, data);
+        },
+        error: function () {
+            $('#reflect').text('Something went wrong :-(');
+        }
+    });
+}
+
+function done(location, data) {
+    var imageDescription = '{{Photograph' +
+    '|photographer = ' + data.result.fb_user_name +
+    '|description = ' + data.result.description +
+    '|date = ' + data.result.created +
+    '|source = {{Ajapaik-source|filepage=' + data.result.photo_link + '}}' +
+    '}}' +
+    '{{cc-by-sa-4.0}}'+ 
+    '{{Location | ' + location.lat + ' | ' + location.lon + ' | heading:' + location.azimuth + ' }}';
+
+    var fileName = 'Ajapaik ' + data.result.id + '.jpg';
+    var imageUrl = data.result.image_large;
+
+    var magnusUrl = '//tools.wmflabs.org/url2commons/index.html?' +
+                    'run=1&' +
+                    'urls=' + imageUrl.replace( /_/g , "$US$" ) + ' ' +
+                    fileName + '|' +
+                    encodeURIComponent(imageDescription).replace( /_/g , "$US$" ) +
+                    '&desc=$DESCRIPTOR$';
+
+    $('#thumb').attr("src", imageUrl);
+    $('#submit_button').attr("href", magnusUrl);
+    $('#submit_button').html('<big>Upload as</big><br/>' + fileName);
+    $('#thumbDiv').removeClass('hidden');
 }
 
 // returns the named url parameter
