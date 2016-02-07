@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="Mapillary to Wikimedia Commons uploader">
-    <meta name="author" content="Lokal_Profil">
+    <meta name="description" content="Ajapaik rephotographs to Wikimedia Commons uploader">
+    <meta name="author" content="Abbe98">
     <link rel="icon" href="../../favicon.ico">
-    <title>Mapillary2Commons</title>
+    <title>Ajapaik2Commons</title>
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
     <![endif]-->
 
     <!-- my stuff -->
-    <link rel='stylesheet' type='text/css' href='stylesheet.css'/>
+    <link rel="stylesheet" href="stylesheet.css"/>
   </head>
   <body>
     <noscript>
@@ -31,13 +31,9 @@
         </noscript>
         <div class="container">
             <div class="page-header">
-                <h1>Mapillary 2 Commons</h1>
+                <h1>Ajapaik2Commons</h1>
             </div>
-            <p class="lead">
-                Ever found a beautiful image on <a href="https://www.mapillary.com">Mapillary</a>
-                and thought <i>That would look great on <a href="https://commons.wikimedia.org">Wikimedia Commons</a></i>?
-            </p>
-            <p> Simply enter the image key or url below and click <i>Check!</i>.
+            <p> Simply enter rephotographed image id below and click <i>Check!</i>.
                 Make sure it's the right image then click on the second
                 button to upload the image to Commons, complete with source
                 and attribution and uploaded using your Wikimedia username.
@@ -45,7 +41,7 @@
 
             <div id="mapillary_id_form" class="form">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="mapillary" title="A Mapillary image id or url" placeholder="http://www.mapillary.com/map/im/2z5MCCrTgC1T29Gm8XJrCg" tabindex=1 required autofocus>
+                    <input type="text" class="form-control" id="ajapaik_id" placeholder="17649" tabindex=1 required autofocus>
                         <span class="input-group-btn">
                             <button id="button" class="btn btn-primary" type="button" tabindex=2>Check!</button>
                         </span>
@@ -59,12 +55,7 @@
                             OAuth Uploader for this tool to work.
                         </li>
                         <li>
-                            If Mapillary doesn't know the name of the location
-                            you'll be prompted to enter one.
-                        </li>
-                        <li>
-                            You can also pass this page a url directly using
-                            the <code>mapillary=</code> url parameter.
+                            Note that only rephotographs can be uploaded to commons.
                         </li>
                         <li>
                             Don't forget to go to the Commons image afterwards
@@ -82,7 +73,7 @@
 
         <footer class="footer">
             <div class="container">
-                <p class="text-muted">The source for this lives on <a href="https://github.com/lokal-profil/mapillary2commons">GitHub</a>, enjoy! /Lokal_Profil</p>
+                <p class="text-muted">The source for this lives on <a href="https://github.com/Abbe98/ajapaik2commons/">GitHub</a> and is based on the <a>Mapillary2Commons tool by Lokal_Profil</a></p>
             </div>
         </footer>
 
