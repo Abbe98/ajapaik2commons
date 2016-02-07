@@ -66,8 +66,6 @@ function queryAjapaik(id) {
         url: url,
         type: 'GET',
         success: function (data) {
-            console.log(data)
-            console.log(data.result.rephoto_of_id)
             // check if the image is valid
             if (data.result.rephoto_of_id != null) {
                 var date = data.result.created;
