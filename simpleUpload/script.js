@@ -70,7 +70,7 @@ function queryAjapaik(id) {
             if (data.result.rephoto_of_id != null) {
                 var date = data.result.created;
                 var imageDescription = '#TODO Template goes here';
-                var fileName = 'Ajapaik_' + id + '.jpg';
+                var fileName = 'Ajapaik ' + id + '.jpg';
                 var imageUrl = data.result.image_large;
 
                 var magnusUrl = '//tools.wmflabs.org/url2commons/index.html?' +
