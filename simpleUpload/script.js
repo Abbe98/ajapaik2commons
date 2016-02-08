@@ -88,11 +88,11 @@ function getImageLocation(id, data) {
     $.ajax({
         url: url,
         type: 'GET',
-        success: function (data) {
+        success: function (result) {
             var location = {};
-            location.lat = data.result.lat;
-            location.lon = data.result.lon;
-            location.azimuth = data.result.azimuth;
+            location.lat = result.result.lat;
+            location.lon = result.result.lon;
+            location.azimuth = result.result.azimuth;
 
             done(location, data);
         },
